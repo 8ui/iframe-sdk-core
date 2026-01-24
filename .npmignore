@@ -1,0 +1,50 @@
+# Source files (not needed in published package)
+src/
+__tests__/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Development files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Build configuration (not needed, dist/ is built)
+rollup.config.js
+tsconfig.json
+jest.config.mjs
+
+# Development dependencies
+node_modules/
+
+# Git
+.git/
+.gitignore
+
+# Documentation (optional - can be included)
+# README.md
+# LICENSE
+# CONTRIBUTING.md
+
+# CI/CD
+.github/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+
+# Environment
+.env
+.env.local
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Only dist/ will be published (as specified in package.json "files" field)
