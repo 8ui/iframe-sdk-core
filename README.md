@@ -1,4 +1,4 @@
-# @restomenu/iframe-sdk-core
+# @8ui/iframe-sdk-core
 
 Universal SDK core for embedding iframe-based services (parent side).
 
@@ -16,13 +16,13 @@ This package provides the base infrastructure for creating SDKs that embed ifram
 ## Installation
 
 ```bash
-npm install @restomenu/iframe-sdk-core
+npm install @8ui/iframe-sdk-core
 ```
 
 ## Usage
 
 ```typescript
-import { BaseSDK, BaseConfig, BaseError } from '@restomenu/iframe-sdk-core';
+import { BaseSDK, BaseConfig, BaseError } from '@8ui/iframe-sdk-core';
 
 interface MyConfig extends BaseConfig {
   // Your specific config fields

@@ -1,5 +1,5 @@
 {
-  "name": "@restomenu/iframe-sdk-core",
+  "name": "@8ui/iframe-sdk-core",
   "version": "1.0.0",
   "description": "Universal SDK core for embedding iframe-based services (parent side)",
   "keywords": [
@@ -10,6 +10,14 @@
     "modal"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/8ui/iframe-sdk-core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/8ui/iframe-sdk-core/issues"
+  },
+  "homepage": "https://github.com/8ui/iframe-sdk-core#readme",
   "main": "dist/iframe-sdk-core.cjs.js",
   "module": "dist/iframe-sdk-core.esm.js",
   "types": "dist/types/index.d.ts",
