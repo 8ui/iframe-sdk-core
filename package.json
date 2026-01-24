@@ -1,0 +1,43 @@
+{
+  "name": "@restomenu/iframe-sdk-core",
+  "version": "1.0.0",
+  "description": "Universal SDK core for embedding iframe-based services (parent side)",
+  "keywords": [
+    "sdk",
+    "iframe",
+    "postmessage",
+    "widget",
+    "modal"
+  ],
+  "license": "MIT",
+  "main": "dist/iframe-sdk-core.cjs.js",
+  "module": "dist/iframe-sdk-core.esm.js",
+  "types": "dist/types/index.d.ts",
+  "sideEffects": false,
+  "files": [
+    "dist/"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/iframe-sdk-core.esm.js",
+      "require": "./dist/iframe-sdk-core.cjs.js",
+      "types": "./dist/types/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "NODE_ENV=production rollup -c",
+    "build:debug": "DEBUG=true NODE_ENV=development rollup -c",
+    "build:dev": "NODE_ENV=development rollup -c",
+    "build:watch": "NODE_ENV=development rollup -c -w",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^28.0.6",
+    "@rollup/plugin-node-resolve": "^16.1.0",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "rollup": "^4.9.2",
+    "rollup-plugin-filesize": "^10.0.0",
+    "typescript": "^5.8.3"
+  }
+}
