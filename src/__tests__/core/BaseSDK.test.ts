@@ -90,11 +90,13 @@ describe('BaseSDK', () => {
     });
 
     it('should reject if modal is already open', async () => {
-      await sdk.open({
+      // Open modal (don't await - it will never resolve in test)
+      const firstPromise = sdk.open({
         serverUrl: 'https://example.com',
         testParam: 'value',
-      }).catch(() => {});
+      });
 
+      // Second open should be rejected immediately
       await expect(
         sdk.open({
           serverUrl: 'https://example.com',
@@ -103,6 +105,10 @@ describe('BaseSDK', () => {
       ).rejects.toMatchObject({
         code: 'MODAL_ALREADY_OPEN',
       });
+
+      // Clean up
+      sdk.close();
+      await firstPromise.catch(() => {}); // Ignore rejection
     });
 
     it('should merge with default config', async () => {
@@ -120,14 +126,17 @@ describe('BaseSDK', () => {
 
   describe('close', () => {
     it('should close modal', async () => {
-      await sdk.open({
+      const promise = sdk.open({
         serverUrl: 'https://example.com',
         testParam: 'value',
-      }).catch(() => {});
+      });
 
       expect(sdk.isOpen).toBe(true);
       sdk.close();
       expect(sdk.isOpen).toBe(false);
+
+      // Clean up - wait for rejection
+      await promise.catch(() => {});
     });
 
     it('should reject pending promise on close', async () => {
@@ -151,10 +160,10 @@ describe('BaseSDK', () => {
     });
 
     it('should send theme to iframe when open', async () => {
-      await sdk.open({
+      const promise = sdk.open({
         serverUrl: 'https://example.com',
         testParam: 'value',
-      }).catch(() => {});
+      });
 
       // Mock iframe and messageBridge
       const iframe = document.querySelector('.test-modal-iframe') as HTMLIFrameElement;
@@ -168,6 +177,7 @@ describe('BaseSDK', () => {
       }
 
       sdk.close();
+      await promise.catch(() => {}); // Clean up - wait for rejection
     });
   });
 
@@ -277,11 +287,12 @@ describe('BaseSDK', () => {
   });
 
   describe('destroy', () => {
-    it('should clean up resources', async () => {
-      await sdk.open({
+    it('should clean up resources', () => {
+      // Open modal (don't await - it will never resolve in test)
+      sdk.open({
         serverUrl: 'https://example.com',
         testParam: 'value',
-      }).catch(() => {});
+      });
 
       sdk.destroy();
       expect(sdk.isOpen).toBe(false);

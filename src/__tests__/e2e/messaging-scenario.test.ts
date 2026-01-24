@@ -116,17 +116,14 @@ describe('E2E: Messaging SDK Scenario', () => {
     expect(sdk.isOpen).toBe(true);
 
     // Step 2: Widget sends APP_READY
-      const messageBridge = (sdk as any).messageBridge as any;
-      const handler = messageBridge.messageHandler;
-
-    handler({
+    sdk.handleMessage({
       source: 'iframe',
       type: 'MESSAGING_APP_READY',
       timestamp: Date.now(),
     });
 
     // Step 3: User opens a chat
-    handler({
+    sdk.handleMessage({
       source: 'iframe',
       type: 'MESSAGING_CHAT_OPENED',
       payload: {
@@ -141,7 +138,7 @@ describe('E2E: Messaging SDK Scenario', () => {
     expect(chatOpenedCallback).toHaveBeenCalled();
 
     // Step 4: User sends a message
-    handler({
+    sdk.handleMessage({
       source: 'iframe',
       type: 'MESSAGING_MESSAGE_SENT',
       payload: {
@@ -156,7 +153,7 @@ describe('E2E: Messaging SDK Scenario', () => {
     expect(messageSentCallback).toHaveBeenCalled();
 
     // Step 5: Receive a message
-    handler({
+    sdk.handleMessage({
       source: 'iframe',
       type: 'MESSAGING_MESSAGE_RECEIVED',
       payload: {
@@ -182,10 +179,7 @@ describe('E2E: Messaging SDK Scenario', () => {
       serverUrl: 'https://messaging.restomenu.cc',
     });
 
-      const messageBridge = (sdk as any).messageBridge as any;
-      const handler = messageBridge.messageHandler;
-
-    handler({
+    sdk.handleMessage({
       source: 'iframe',
       type: 'MESSAGING_ERROR',
       payload: {

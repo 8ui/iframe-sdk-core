@@ -184,8 +184,8 @@ export abstract class BaseSDK<
       this.state.pendingPromise = null;
     }
 
-    // Close modal
-    this.modalManager.closeModal(this.state.modal, this.state.config || undefined);
+    // Close modal (skip callback to avoid infinite recursion)
+    this.modalManager.closeModal(this.state.modal, this.state.config || undefined, true);
 
     // Reset state
     this.state.isOpen = false;

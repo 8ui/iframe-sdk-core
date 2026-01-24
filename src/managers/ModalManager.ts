@@ -566,10 +566,11 @@ export class ModalManager {
    */
   closeModal<TConfig extends BaseConfig>(
     modalElement: HTMLElement,
-    config?: TConfig
+    config?: TConfig,
+    skipCallback?: boolean
   ): void {
-    // Notify SDK about the close event
-    if (this.onCloseCallback) {
+    // Notify SDK about the close event (skip if closing from SDK to avoid recursion)
+    if (!skipCallback && this.onCloseCallback) {
       this.onCloseCallback();
     }
 
@@ -580,8 +581,7 @@ export class ModalManager {
     // Apply close animations if enabled
     if (
       config?.animations?.enabled &&
-      config.animations.animations.length > 0 &&
-      (modalElement.style.transition || modal?.style.transition)
+      config.animations.animations.length > 0
     ) {
       const animations = config.animations.animations;
       this.applyCloseAnimationStates(

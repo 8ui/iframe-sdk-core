@@ -88,17 +88,14 @@ describe('E2E: Preorder SDK Scenario', () => {
     expect(sdk.isOpen).toBe(true);
 
     // Step 2: Widget sends APP_READY
-      const messageBridge = (sdk as any).messageBridge as any;
-      const handler = messageBridge.messageHandler;
-
-    handler({
+    sdk.handleMessage({
       source: 'iframe',
       type: 'PREORDER_APP_READY',
       timestamp: Date.now(),
     });
 
     // Step 3: Widget sends order update
-    handler({
+    sdk.handleMessage({
       source: 'iframe',
       type: 'PREORDER_UPDATED',
       payload: {
@@ -113,7 +110,7 @@ describe('E2E: Preorder SDK Scenario', () => {
     expect(orderUpdatedCallback).toHaveBeenCalled();
 
     // Step 4: Widget sends completion
-    handler({
+    sdk.handleMessage({
       source: 'iframe',
       type: 'PREORDER_COMPLETED',
       payload: {
@@ -155,10 +152,7 @@ describe('E2E: Preorder SDK Scenario', () => {
       serverUrl: 'https://external-menu.dev.restomenu.cc',
     });
 
-      const messageBridge = (sdk as any).messageBridge as any;
-      const handler = messageBridge.messageHandler;
-
-    handler({
+    sdk.handleMessage({
       source: 'iframe',
       type: 'PREORDER_ERROR',
       payload: {

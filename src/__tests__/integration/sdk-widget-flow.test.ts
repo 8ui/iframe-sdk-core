@@ -4,8 +4,6 @@
  */
 
 import { BaseSDK } from '../../core/BaseSDK';
-import { MessageBridge } from '../../managers/MessageBridge';
-import { ModalManager } from '../../managers/ModalManager';
 import type { BaseConfig, BaseError, IframeMessage } from '../../types';
 
 // Test SDK implementation
@@ -86,31 +84,19 @@ describe('SDK → Widget Integration Flow', () => {
       expect(sdk.isOpen).toBe(true);
 
       // Simulate widget sending APP_READY
-      const readyMessage: IframeMessage = {
+      sdk.handleMessage({
         source: 'iframe',
         type: 'APP_READY',
         timestamp: Date.now(),
-      };
-
-      // Get message handler from MessageBridge
-      const messageBridge = (sdk as any).messageBridge as MessageBridge;
-      const handler = (messageBridge as any).messageHandler;
-      
-      if (handler) {
-        handler(readyMessage);
-      }
+      });
 
       // Simulate widget sending COMPLETED
-      const completedMessage: IframeMessage = {
+      sdk.handleMessage({
         source: 'iframe',
         type: 'COMPLETED',
         payload: { success: true, data: 'test' },
         timestamp: Date.now(),
-      };
-
-      if (handler) {
-        handler(completedMessage);
-      }
+      });
 
       const result = await promise;
       expect(result).toEqual({ success: true, data: 'test' });
@@ -123,10 +109,7 @@ describe('SDK → Widget Integration Flow', () => {
         param: 'value',
       });
 
-      const messageBridge = (sdk as any).messageBridge;
-      const handler = (messageBridge as MessageBridge)['messageHandler'];
-
-      const errorMessage: IframeMessage = {
+      sdk.handleMessage({
         source: 'iframe',
         type: 'ERROR',
         payload: {
@@ -134,11 +117,7 @@ describe('SDK → Widget Integration Flow', () => {
           message: 'Test error',
         },
         timestamp: Date.now(),
-      };
-
-      if (handler) {
-        handler(errorMessage);
-      }
+      });
 
       await expect(promise).rejects.toMatchObject({
         code: 'TEST_ERROR',
@@ -154,19 +133,12 @@ describe('SDK → Widget Integration Flow', () => {
         param: 'value',
       });
 
-      const messageBridge = (sdk as any).messageBridge;
-      const handler = (messageBridge as MessageBridge)['messageHandler'];
-
       // Simulate APP_READY
-      const readyMessage: IframeMessage = {
+      sdk.handleMessage({
         source: 'iframe',
         type: 'APP_READY',
         timestamp: Date.now(),
-      };
-
-      if (handler) {
-        handler(readyMessage);
-      }
+      });
 
       // Check that theme was sent
       const iframe = document.querySelector('.test-modal-iframe') as HTMLIFrameElement;
@@ -219,19 +191,12 @@ describe('SDK → Widget Integration Flow', () => {
         param: 'value',
       });
 
-      const messageBridge = (sdk as any).messageBridge;
-      const handler = (messageBridge as MessageBridge)['messageHandler'];
-
       // Widget sends APP_READY
-      const readyMessage: IframeMessage = {
+      sdk.handleMessage({
         source: 'iframe',
         type: 'APP_READY',
         timestamp: Date.now(),
-      };
-
-      if (handler) {
-        handler(readyMessage);
-      }
+      });
 
       // SDK should send theme to widget
       const iframe = document.querySelector('.test-modal-iframe') as HTMLIFrameElement;

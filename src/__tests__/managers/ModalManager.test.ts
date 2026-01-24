@@ -172,7 +172,7 @@ describe('ModalManager', () => {
           animations: [
             {
               type: 'fade',
-              duration: 100,
+              duration: 300,
             },
           ],
         },
@@ -185,11 +185,11 @@ describe('ModalManager', () => {
 
       manager.closeModal(modal, config);
 
-      // Modal should be removed after animation duration
+      // Modal should be removed after animation duration (300ms minimum + buffer)
       setTimeout(() => {
         expect(document.body.contains(modal)).toBe(false);
         done();
-      }, 150);
+      }, 350);
     });
   });
 

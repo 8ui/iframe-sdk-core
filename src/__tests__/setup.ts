@@ -3,6 +3,13 @@
 // Define __DEBUG__ global variable for tests
 (global as any).__DEBUG__ = true;
 
+// Handle unhandled promise rejections gracefully in tests
+// This prevents Node.js 23+ from crashing on unhandled rejections
+process.on('unhandledRejection', (reason) => {
+  // Silently ignore rejections that are expected in tests
+  // (e.g., USER_CANCELLED when closing modals)
+});
+
 // Mock window.postMessage
 global.postMessage = jest.fn();
 

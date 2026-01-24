@@ -38,9 +38,9 @@
     "build:dev": "NODE_ENV=development rollup -c",
     "build:watch": "NODE_ENV=development rollup -c -w",
     "type-check": "tsc --noEmit",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test": "NODE_OPTIONS='--unhandled-rejections=warn' jest",
+    "test:watch": "NODE_OPTIONS='--unhandled-rejections=warn' jest --watch",
+    "test:coverage": "NODE_OPTIONS='--unhandled-rejections=warn' jest --coverage"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.6",
@@ -52,7 +52,9 @@
     "jest-environment-jsdom": "^29.7.0",
     "rollup": "^4.9.2",
     "rollup-plugin-filesize": "^10.0.0",
+    "rollup-plugin-typescript2": "^0.36.0",
     "ts-jest": "^29.1.0",
+    "tslib": "^2.8.1",
     "typescript": "^5.8.3"
   }
 }

@@ -26,4 +26,7 @@ export default {
     },
   },
   testTimeout: 10000,
+  // Workaround for Node.js 23+ strict unhandled rejection mode
+  workerIdleMemoryLimit: '512MB',
+  maxWorkers: 1,
 };
