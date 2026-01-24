@@ -14,6 +14,9 @@ export default {
     '^.+\\.ts$': 'ts-jest',
   },
   setupFilesAfterEnv: ['<rootDir>/src/__tests__/setup.ts'],
+  globals: {
+    __DEBUG__: true,
+  },
   coverageThreshold: {
     global: {
       branches: 70,

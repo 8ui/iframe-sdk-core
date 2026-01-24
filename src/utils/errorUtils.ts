@@ -26,7 +26,7 @@ export const createError = (
  */
 export const isBaseError = (obj: any): obj is BaseError => {
   return (
-    obj &&
+    obj != null &&
     typeof obj === 'object' &&
     typeof obj.code === 'string' &&
     typeof obj.message === 'string'

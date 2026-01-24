@@ -1,5 +1,8 @@
 // Jest setup for iframe-sdk-core tests
 
+// Define __DEBUG__ global variable for tests
+(global as any).__DEBUG__ = true;
+
 // Mock window.postMessage
 global.postMessage = jest.fn();
 

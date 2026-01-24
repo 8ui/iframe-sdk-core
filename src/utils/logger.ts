@@ -6,8 +6,8 @@
 
 /**
  * Debug flag set during build time
+ * Declared globally in src/globals.d.ts
  */
-declare const __DEBUG__: boolean;
 const DEBUG_FLAG = __DEBUG__;
 
 /**
