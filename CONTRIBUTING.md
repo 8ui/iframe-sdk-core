@@ -5,7 +5,7 @@ Thank you for your interest in contributing to iframe-sdk-core!
 ## Getting Started
 
 1. Fork the repository
-2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/iframe-sdk-core.git`
+2. Clone your fork: `git clone https://github.com/8ui/iframe-sdk-core.git`
 3. Install dependencies: `npm install`
 4. Create a branch for your changes: `git checkout -b feature/your-feature-name`
 
