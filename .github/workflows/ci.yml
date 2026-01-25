@@ -54,7 +54,23 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Check if version exists
+        id: check_version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          if npm view @8ui/iframe-sdk-core@$VERSION version > /dev/null 2>&1; then
+            echo "Version $VERSION already exists in npm, skipping publish"
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "Version $VERSION does not exist in npm, will publish"
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+        continue-on-error: true
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: Publish to npm
+        if: steps.check_version.outputs.exists != 'true'
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
