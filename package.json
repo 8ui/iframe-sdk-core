@@ -1,6 +1,6 @@
 {
   "name": "@8ui/iframe-sdk-core",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Universal SDK core for embedding iframe-based services (parent side)",
   "keywords": [
     "sdk",
