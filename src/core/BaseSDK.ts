@@ -54,6 +54,7 @@ export abstract class BaseSDK<
     });
     this.messageBridge = new MessageBridge({
       iframeSelector: this.modalManager.getIframeSelector(),
+      ...(options.allowedSources ? { allowedSources: options.allowedSources } : {}),
     });
     this.themeManager = new ThemeManager();
     this.eventEmitter = new EventEmitter();
@@ -105,10 +106,11 @@ export abstract class BaseSDK<
     }
 
     try {
-      // Merge with defaults
+      // Merge with defaults and previously configured state
       const defaultConfig = this.getDefaultConfig();
       const mergedConfig = {
         ...defaultConfig,
+        ...this.state.config,
         ...config,
       } as TConfig;
 

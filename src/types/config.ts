@@ -65,4 +65,5 @@ export interface BaseConfig {
 export interface SDKOptions {
   classPrefix: string;
   storagePrefix?: string;
+  allowedSources?: string[];
 }
